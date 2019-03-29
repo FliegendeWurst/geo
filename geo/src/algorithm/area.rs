@@ -101,7 +101,7 @@ where
 #[cfg(test)]
 mod test {
     use crate::algorithm::area::Area;
-    use crate::{Coordinate, Line, LineString, line_string, MultiPolygon, polygon, Polygon, Rect, Triangle};
+    use crate::{Coordinate, Line, line_string, MultiPolygon, polygon, Polygon, Rect, Triangle};
     use crate as geo;
 
     // Area of the polygon
@@ -169,18 +169,27 @@ mod test {
     }
     #[test]
     fn area_multipolygon_test() {
-        let poly0 = Polygon::new(
-            LineString::from(vec![(0., 0.), (10., 0.), (10., 10.), (0., 10.), (0., 0.)]),
-            Vec::new(),
-        );
-        let poly1 = Polygon::new(
-            LineString::from(vec![(1., 1.), (2., 1.), (2., 2.), (1., 2.), (1., 1.)]),
-            Vec::new(),
-        );
-        let poly2 = Polygon::new(
-            LineString::from(vec![(5., 5.), (6., 5.), (6., 6.), (5., 6.), (5., 5.)]),
-            Vec::new(),
-        );
+        let poly0 = polygon![
+            (x: 0., y: 0.),
+            (x: 10., y: 0.),
+            (x: 10., y: 10.),
+            (x: 0., y: 10.),
+            (x: 0., y: 0.)
+        ];
+        let poly1 = polygon![
+            (x: 1., y: 1.),
+            (x: 2., y: 1.),
+            (x: 2., y: 2.),
+            (x: 1., y: 2.),
+            (x: 1., y: 1.)
+        ];
+        let poly2 = polygon![
+            (x: 5., y: 5.),
+            (x: 6., y: 5.),
+            (x: 6., y: 6.),
+            (x: 5., y: 6.),
+            (x: 5., y: 5.)
+        ];
         let mpoly = MultiPolygon(vec![poly0, poly1, poly2]);
         assert_eq!(mpoly.area(), 102.);
         assert_relative_eq!(mpoly.area(), 102.);
