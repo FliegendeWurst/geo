@@ -44,6 +44,8 @@ macro_rules! point {
 /// ```
 #[macro_export]
 macro_rules! line_string {
+    // TODO: doesn't handle y, x or lng, lat
+    // TODO: doesn't handle trailing comma
     ($((x: $x:expr, y: $y:expr)),*) => {
         {
             #[allow(unused_mut)]

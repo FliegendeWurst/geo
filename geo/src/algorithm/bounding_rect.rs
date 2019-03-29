@@ -142,6 +142,8 @@ mod test {
     use crate::{
         Coordinate, Line, LineString, MultiLineString, MultiPoint, MultiPolygon, Polygon, Rect,
     };
+    use crate as geo;
+    use crate::line_string;
 
     #[test]
     fn empty_linestring_test() {

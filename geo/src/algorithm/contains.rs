@@ -277,6 +277,7 @@ mod test {
     use crate::algorithm::contains::Contains;
     use crate::{Coordinate, Line, LineString, MultiPolygon, Point, Polygon, Rect, Triangle};
     use crate::line_string;
+    use crate as geo;
     #[test]
     // V doesn't contain rect because two of its edges intersect with V's exterior boundary
     fn polygon_does_not_contain_polygon() {
@@ -562,7 +563,7 @@ mod test {
             c(5., 0.),
             c(5., 5.),
             c(0., 5.),
-            c(-1., 0.),
+            c(-1., 0.)
         ];
         let poly0 = Polygon::new(linestring0, Vec::new());
         let linestring1 = line_string![c(0., 0.), c(0., 2.), c(2., 2.), c(2., 0.), c(0., 0.)];
