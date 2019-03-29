@@ -179,10 +179,10 @@ where
 
 #[cfg(test)]
 mod test {
-
     use super::*;
     use crate as geo;
-    use crate::{point, polygon, Point};
+    use crate::{point, polygon};
+
     #[test]
     fn test_polygon_extreme_x() {
         // a diamond shape
@@ -264,7 +264,13 @@ mod test {
     #[test]
     fn test_polygon_extreme_point_x() {
         // a diamond shape
-        let poly1 = polygon![(x: 1.0, y: 0.0), (x: 2.0, y: 1.0), (x: 1.0, y: 2.0), (x: 0.0, y: 1.0), (x: 1.0, y: 0.0)];
+        let poly1 = polygon![
+            (x: 1.0, y: 0.0),
+            (x: 2.0, y: 1.0),
+            (x: 1.0, y: 2.0),
+            (x: 0.0, y: 1.0),
+            (x: 1.0, y: 0.0)
+        ];
         let extremes = poly1.extreme_points();
         let correct = point!(x: 0.0, y: 1.0);
         assert_eq!(extremes.xmin, correct);

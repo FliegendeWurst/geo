@@ -95,7 +95,8 @@ mod test {
                 (x: 11., y: 0.)
             ],
             line_string![
-                (x: 0., y: 0.), (x: 0., y: 5.)
+                (x: 0., y: 0.),
+                (x: 0., y: 5.)
             ],
         ]);
         assert_eq!(15.0_f64, mline.euclidean_length());
