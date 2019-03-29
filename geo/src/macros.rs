@@ -1,6 +1,7 @@
+#[macro_export]
 macro_rules! point {
     (x: $x:expr, y: $y:expr) => {
-        ()
+        geo::Point::new($x, $y)
     }; // (y: $y:expr, x: $x:expr) => { () };
 }
 
@@ -64,6 +65,23 @@ macro_rules! line_string {
                 v.push($coord);
             )*
             geo::LineString(v)
+        }
+    };
+}
+
+#[macro_export]
+macro_rules! polygon {
+    // TODO: doesn't handle y, x or lng, lat
+    // TODO: doesn't handle trailing comma
+    // TODO: add to geo-types?
+    ($((x: $x:expr, y: $y:expr)),*) => {
+        {
+            #[allow(unused_mut)]
+            let mut v = Vec::<geo::Coordinate<_>>::new();
+            $(
+                v.push(geo::Coordinate { x: $x, y: $y });
+            )*
+            geo::Polygon::new(geo::LineString(v), vec![])
         }
     };
 }

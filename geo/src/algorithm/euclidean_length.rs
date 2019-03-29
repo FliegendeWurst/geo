@@ -59,7 +59,7 @@ mod test {
     use crate as geo;
     use crate::algorithm::euclidean_length::EuclideanLength;
     use crate::line_string;
-    use crate::{Coordinate, Line, LineString, MultiLineString};
+    use crate::{Coordinate, Line, MultiLineString};
 
     #[test]
     fn empty_linestring_test() {

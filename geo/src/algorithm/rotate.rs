@@ -213,10 +213,12 @@ where
 #[cfg(test)]
 mod test {
     use super::*;
-    use crate::{Coordinate, LineString, Point, Polygon};
+    use crate as geo;
+    use crate::{line_string, point, Coordinate, LineString, Point, Polygon};
+
     #[test]
     fn test_rotate_around_point() {
-        let p = Point::new(1.0, 5.0);
+        let p = point!(x: 1.0, y: 5.0);
         let rotated = p.rotate(30.0);
         // results agree with Shapely / GEOS
         assert_eq!(rotated, Point::new(1.0, 5.0));
@@ -274,17 +276,17 @@ mod test {
     }
     #[test]
     fn test_rotate_polygon_holes() {
-        let ls1 = LineString::from(vec![
-            (5.0, 1.0),
-            (4.0, 2.0),
-            (4.0, 3.0),
-            (5.0, 4.0),
-            (6.0, 4.0),
-            (7.0, 3.0),
-            (7.0, 2.0),
-            (6.0, 1.0),
-            (5.0, 1.0),
-        ]);
+        let ls1 = line_string![
+            (x: 5.0, y: 1.0),
+            (x: 4.0, y: 2.0),
+            (x: 4.0, y: 3.0),
+            (x: 5.0, y: 4.0),
+            (x: 6.0, y: 4.0),
+            (x: 7.0, y: 3.0),
+            (x: 7.0, y: 2.0),
+            (x: 6.0, y: 1.0),
+            (x: 5.0, y: 1.0)
+        ];
 
         let ls2 = LineString::from(vec![(5.0, 1.3), (5.5, 2.0), (6.0, 1.3), (5.0, 1.3)]);
 
