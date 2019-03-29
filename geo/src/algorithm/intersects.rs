@@ -265,8 +265,8 @@ mod test {
     /// Tests: intersection LineString and LineString
     #[test]
     fn empty_linestring1_test() {
-        let linestring = LineString::from(vec![(3., 2.), (7., 6.)]);
-        assert!(!LineString(Vec::new()).intersects(&linestring));
+        let linestring = line_string![(x: 3., y: 2.), (x: 7., y: 6.)];
+        assert!(!line_string![].intersects(&linestring));
     }
     #[test]
     fn empty_linestring2_test() {
