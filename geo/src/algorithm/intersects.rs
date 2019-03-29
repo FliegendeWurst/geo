@@ -261,7 +261,9 @@ where
 #[cfg(test)]
 mod test {
     use crate::algorithm::intersects::Intersects;
-    use crate::{Coordinate, Line, LineString, Point, Polygon, Rect};
+    use crate::{Coordinate, Line, LineString, line_string, Point, Polygon, Rect};
+    use crate as geo;
+
     /// Tests: intersection LineString and LineString
     #[test]
     fn empty_linestring1_test() {
