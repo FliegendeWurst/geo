@@ -45,6 +45,7 @@ macro_rules! point {
 macro_rules! line_string {
     // TODO: doesn't handle y, x or lng, lat
     // TODO: doesn't handle trailing comma
+    // TODO: add to geo-types?
     ($((x: $x:expr, y: $y:expr)),*) => {
         {
             #[allow(unused_mut)]
