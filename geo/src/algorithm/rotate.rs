@@ -91,21 +91,25 @@ pub trait RotatePoint<T> {
     /// # Examples
     ///
     /// ```
-    /// use geo::{Point, LineString};
-    /// use geo::algorithm::rotate::{RotatePoint};
+    /// use geo::algorithm::rotate::RotatePoint;
+    /// use geo::{line_string, point};
     ///
-    /// let mut vec = Vec::new();
-    /// vec.push(Point::new(0.0, 0.0));
-    /// vec.push(Point::new(5.0, 5.0));
-    /// vec.push(Point::new(10.0, 10.0));
-    /// let linestring = LineString::from(vec);
-    /// let rotated = linestring.rotate_around_point(-45.0, Point::new(10.0, 0.0));
-    /// let mut correct = Vec::new();
-    /// correct.push(Point::new(2.9289321881345245, 7.071067811865475));
-    /// correct.push(Point::new(10.0, 7.0710678118654755));
-    /// correct.push(Point::new(17.071067811865476, 7.0710678118654755));
-    /// let correct_ls = LineString::from(correct);
-    /// assert_eq!(rotated, correct_ls);
+    /// let ls = line_string![
+    ///     (x: 0.0, y: 0.0),
+    ///     (x: 5.0, y: 5.0),
+    ///     (x: 10.0, y: 10.0)
+    /// ];
+    ///
+    /// let rotated = ls.rotate_around_point(
+    ///     -45.0,
+    ///     point!(x: 10.0, y: 0.0),
+    /// );
+    ///
+    /// assert_eq!(rotated, line_string![
+    ///     (x: 2.9289321881345245, y: 7.071067811865475),
+    ///     (x: 10.0, y: 7.0710678118654755),
+    ///     (x: 17.071067811865476, y: 7.0710678118654755)
+    /// ]);
     /// ```
     fn rotate_around_point(&self, angle: T, point: Point<T>) -> Self
     where
@@ -225,16 +229,18 @@ mod test {
     }
     #[test]
     fn test_rotate_linestring() {
-        let vec = vec![(0.0, 0.0), (5.0, 5.0), (10.0, 10.0)];
-        let linestring = LineString::from(vec);
+        let linestring = line_string![
+            (x: 0.0, y: 0.0),
+            (x: 5.0, y: 5.0),
+            (x: 10.0, y: 10.0)
+        ];
         let rotated = linestring.rotate(-45.0);
-        let mut correct = Vec::new();
-        correct.push(Point::new(-2.0710678118654755, 5.0));
-        correct.push(Point::new(5.0, 5.0));
-        correct.push(Point::new(12.071067811865476, 5.0));
-        let correct_ls = LineString::from(correct);
         // results agree with Shapely / GEOS
-        assert_eq!(rotated, correct_ls);
+        assert_eq!(rotated, line_string![
+            (x: -2.0710678118654755, y: 5.0),
+            (x: 5.0, y: 5.0),
+            (x: 12.071067811865476, y: 5.0)
+        ]);
     }
     #[test]
     fn test_rotate_polygon() {
