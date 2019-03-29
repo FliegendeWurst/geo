@@ -309,7 +309,9 @@ mod test {
     use crate::{
         Coordinate, Line, LineString, MultiPolygon, Point, Polygon, Rect, COORD_PRECISION,
     };
+    use crate::line_string;
     use num_traits::Float;
+    use crate as geo;
 
     /// small helper to create a coordinate
     fn c<T: Float>(x: T, y: T) -> Coordinate<T> {
@@ -324,7 +326,7 @@ mod test {
     // Tests: Centroid of LineString
     #[test]
     fn empty_linestring_test() {
-        let linestring: LineString<f32> = LineString(vec![]);
+        let linestring: LineString<f32> = line_string![];
         let centroid = linestring.centroid();
         assert!(centroid.is_none());
     }
@@ -334,20 +336,20 @@ mod test {
             x: 40.02f64,
             y: 116.34,
         };
-        let linestring = LineString(vec![coord]);
+        let linestring = line_string![coord];
         let centroid = linestring.centroid();
         assert_eq!(centroid, Some(Point(coord)));
     }
     #[test]
     fn linestring_test() {
-        let linestring = LineString(vec![
-            Coordinate { x: 1., y: 1. },
-            Coordinate { x: 7., y: 1. },
-            Coordinate { x: 8., y: 1. },
-            Coordinate { x: 9., y: 1. },
-            Coordinate { x: 10., y: 1. },
-            Coordinate { x: 11., y: 1. },
-        ]);
+        let linestring = line_string![
+            (x: 1., y: 1.),
+            (x: 7., y: 1.),
+            (x: 8., y: 1.),
+            (x: 9., y: 1.),
+            (x: 10., y: 1.),
+            (x: 11., y: 1.)
+        ];
         assert_eq!(
             linestring.centroid(),
             Some(Point(Coordinate { x: 6., y: 1. }))
@@ -366,7 +368,7 @@ mod test {
     fn polygon_one_point_test() {
         let p = Point(Coordinate { x: 2., y: 1. });
         let v = Vec::new();
-        let linestring = LineString(vec![p.0]);
+        let linestring = line_string![p.0];
         let poly = Polygon::new(linestring, v);
         assert_eq!(poly.centroid(), Some(p));
     }
@@ -374,8 +376,8 @@ mod test {
     #[test]
     fn polygon_test() {
         let v = Vec::new();
-        let linestring = LineString(vec![c(0., 0.), c(2., 0.), c(2., 2.), c(0., 2.), c(0., 0.)]);
-        let poly = Polygon::new(linestring, v);
+        let ls = line_string![(x: 0., y: 0.), (x: 2., y: 0.), (x: 2., y: 2.), (x: 0., y: 2.), (x: 0., y: 0.)];
+        let poly = Polygon::new(ls, v);
         assert_eq!(poly.centroid(), Some(Point::new(1., 1.)));
     }
     #[test]

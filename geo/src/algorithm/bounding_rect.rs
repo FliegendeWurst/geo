@@ -145,7 +145,7 @@ mod test {
 
     #[test]
     fn empty_linestring_test() {
-        let linestring: LineString<f32> = LineString(vec![]);
+        let linestring: LineString<f32> = line_string![];
         let bounding_rect = linestring.bounding_rect();
         assert!(bounding_rect.is_none());
     }
