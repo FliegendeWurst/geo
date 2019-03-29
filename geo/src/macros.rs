@@ -1,8 +1,7 @@
 macro_rules! point {
     (x: $x:expr, y: $y:expr) => {
         ()
-    };
-    // (y: $y:expr, x: $x:expr) => { () };
+    }; // (y: $y:expr, x: $x:expr) => { () };
 }
 
 /// Creates a [`LineString`] containing the given coordinates.

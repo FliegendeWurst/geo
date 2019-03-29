@@ -138,12 +138,12 @@ where
 
 #[cfg(test)]
 mod test {
+    use crate as geo;
     use crate::algorithm::bounding_rect::BoundingRect;
+    use crate::line_string;
     use crate::{
         Coordinate, Line, LineString, MultiLineString, MultiPoint, MultiPolygon, Polygon, Rect,
     };
-    use crate as geo;
-    use crate::line_string;
 
     #[test]
     fn empty_linestring_test() {

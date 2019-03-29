@@ -274,10 +274,10 @@ where
 
 #[cfg(test)]
 mod test {
-    use crate::algorithm::contains::Contains;
-    use crate::{Coordinate, Line, LineString, MultiPolygon, Point, Polygon, Rect, Triangle};
-    use crate::line_string;
     use crate as geo;
+    use crate::algorithm::contains::Contains;
+    use crate::line_string;
+    use crate::{Coordinate, Line, LineString, MultiPolygon, Point, Polygon, Rect, Triangle};
     #[test]
     // V doesn't contain rect because two of its edges intersect with V's exterior boundary
     fn polygon_does_not_contain_polygon() {
@@ -558,13 +558,7 @@ mod test {
     fn line_in_polygon_test() {
         let c = |x, y| Coordinate { x, y };
         let line = Line::new(c(0., 1.), c(3., 4.));
-        let linestring0 = line_string![
-            c(-1., 0.),
-            c(5., 0.),
-            c(5., 5.),
-            c(0., 5.),
-            c(-1., 0.)
-        ];
+        let linestring0 = line_string![c(-1., 0.), c(5., 0.), c(5., 5.), c(0., 5.), c(-1., 0.)];
         let poly0 = Polygon::new(linestring0, Vec::new());
         let linestring1 = line_string![c(0., 0.), c(0., 2.), c(2., 2.), c(2., 0.), c(0., 0.)];
         let poly1 = Polygon::new(linestring1, Vec::new());

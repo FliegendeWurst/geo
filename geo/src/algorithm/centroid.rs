@@ -304,14 +304,14 @@ where
 
 #[cfg(test)]
 mod test {
+    use crate as geo;
     use crate::algorithm::centroid::Centroid;
     use crate::algorithm::euclidean_distance::EuclideanDistance;
+    use crate::line_string;
     use crate::{
         Coordinate, Line, LineString, MultiPolygon, Point, Polygon, Rect, COORD_PRECISION,
     };
-    use crate::line_string;
     use num_traits::Float;
-    use crate as geo;
 
     /// small helper to create a coordinate
     fn c<T: Float>(x: T, y: T) -> Coordinate<T> {
